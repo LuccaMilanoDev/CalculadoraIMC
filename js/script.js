@@ -65,5 +65,36 @@ function createTable(data) {
 
     const obesity = document.createElement("p");
     obesity.innerText = item.obesity;
+
+    div.appendChild(classification);
+    div.appendChild(info);
+    div.appendChild(obesity);
+
+    imcTable.appendChild(div);
   });
 }
+
+function cleanInput() {
+  heightInput.value = "";
+  heightInput.value = "";
+}
+
+function validDigits(text) {
+  return text.replace(/[^0-9,]/g, "");
+}
+
+[heightInput, weightInput].forEach((el) => {
+  el.addEventListener("input", (e) => {
+    const updatedValue = validDigits(e.target.value);
+
+    e.target.value = updatedValue;
+  });
+});
+
+calcBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  calcContainer.classList.add("hide");
+  resultContainer.classList.remove("hide");
+  cleanInput();
+});
+createTable(data);
